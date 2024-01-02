@@ -1,0 +1,88 @@
+// This is the recommended place for user overrides.
+// See _variables.scss for available tweaks.
+// Also see exampleSite/assets/scss/slate/docuapi_overrides.scss for some example tweaks.
+
+$main-bg: #fff !default;
+$nav-bg: #e7effd !default;
+$nav-active-parent-bg: #4B89BF !default;
+$nav-subitem-bg: #d0e0fb !default;
+$nav-active-bg: #4B89BF !default;
+$nav-width: 300px !default;
+$nav-padding: 30px !default; // padding to left and right of navbar
+$examples-width: 50% !default; // portion of the screen taken up by code examples
+$aside-notice-bg: #F2D5A0 !default;
+
+.content p {
+    font-family: "MuseoSans";
+}
+
+$nav-text: #333 !default;
+
+.toc-wrapper {
+  font-size: 13px;
+  font-family: "MuseoSans";
+}
+
+.da-toc-list-h1 {
+  font-family: "MuseoSans";
+}
+
+.da-toc-list-h2 {
+  font-family: "MuseoSans";
+}
+
+.content h1 {
+    color: #4B89BF;
+}
+
+.content h2 {
+    color: #4B89BF;
+}
+
+.content h3 {
+    color: #4B89BF;
+}
+
+.content h4 {
+    color: #4B89BF;
+}
+
+.content table th {
+    color: #333;
+    font-family: "MuseoSans";
+}
+
+.content table td {
+    color: #333;
+    font-family: "MuseoSans";
+    font-size: 12px;
+}
+
+.content li {
+    color: #333;
+    font-family: "MuseoSans";
+    }
+
+a:link {
+  text-decoration: none;
+  color: #356997;
+}
+
+.da-highlight-mark {
+    background: #F2E205;
+}
+
+@font-face {
+    font-family: "MuseoSans";
+    src: url('/fonts/MuseoSans_300.otf') format('truetype');
+}
+
+@font-face {
+    font-family: "MuseoSans Italic";
+    src: url('/fonts/MuseoSans_300_italic.otf') format('truetype');
+}
+
+@font-face {
+    font-family: "MuseoSans Bold";
+    src: url('/fonts/MuseoSans_700.otf') format('truetype');
+}

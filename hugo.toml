@@ -1,0 +1,65 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'GX/Kernel Programming Guide'
+
+theme = "docuapi"
+
+disableKinds = ["taxonomy"]
+
+[markup]
+    defaultMarkdownHandler = "goldmark"
+  
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Code higlighting settings
+pygmentsCodefences            = true
+pygmentsCodeFencesGuesSsyntax = false
+pygmentsOptions               = ""
+pygmentsStyle                 = "monokai"
+pygmentsUseClasses            = false
+
+defaultContentLanguage = "en"
+
+[module]
+[module.hugoVersion]
+[[module.imports]]
+path = "github.com/bep/docuapi"
+
+[params]
+  search       = true
+  maxMenuDepth = 2    # (optional) available options are: 1, 2, or 3 (default: 2)
+
+  # Configure the language example tabs.
+  [[params.language_tabs]]
+    key  = "c"
+    name = "C language"
+#  [[params.language_tabs]]
+#    key  = "go"
+#    name = "Go"
+#  [[params.language_tabs]]
+#    key  = "shell"
+#    name = "Shell"
+#  [[params.language_tabs]]
+#    key  = "ruby"
+#    name = "Ruby"
+#  [[params.language_tabs]]
+#    key  = "python"
+#    name = "Python"
+#  [[params.language_tabs]]
+#    key  = "javascript"
+#    name = "Javascript"
+
+#Languages 
+[languages]
+
+  [languages.en]
+    languageName = "English"
+    weight       = 2
+    title        = "DocuAPI Example Site"
+    [languages.en.params]
+      # Left sidebar footer items. Use HTMl or Markdown.
+      toc_footers = [
+        "Powered by [Hugo](https://gohugo.io/) using the [DocuAPI](https://github.com/bep/docuapi) theme"
+      ]
