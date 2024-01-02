@@ -44,7 +44,7 @@ completed, for two high-priority tasks, is 476 microseconds, which is about
 2,100 messages per second.
 
 For each lower task priority level, about six microseconds more is
-needed to send and receive a message. Messages do not have a priority.
+needed to send and receive a message. Messages don't have a priority.
 
 Similarly, the time between the call to SIGNAL an event and when the
 WAIT for the event is completed, for two high-priority tasks, is 422

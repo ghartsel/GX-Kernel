@@ -27,7 +27,7 @@ parameters.
 Include files provide a common, portable interface to the GX/Kernel.
 Include files gki-l.h, gki-l.inc, gki-k-l.h and
 gki-k-l.inc contain the literals used with the kernel primitives
-described in this section. These include files may be changed to adapt
+described in this section. These include files that might be changed to adapt
 the kernel to the application.
 
 These literals provide a method to reference kernel attributes
@@ -58,7 +58,7 @@ switch (status):
 | `DO_FOREVER` | This is used within a task to define the start of the main task execution loop. |
 | `DO_NOTHING` | A statement place-holder, which generates no code. |
 | `INV_ADDR` | This literal is used to set pointer variables to an invalid address, which may be used for fault detection. |
-| `NOT_USED` | This is a parameter literal to indicate a parameter is not used or has no significance. |
+| `NOT_USED` | This is a parameter literal to indicate a parameter isn't used or has no significance. |
 | `SUCCESS` | This value is returned by primitives to indicate no errors occurred. |
 | `FAILURE` | If an error occurred during primitive execution, a FAILURE status is returned. |
 | `TIMEOUT` | This literal is returned by primitives to indicate a timeout condition occurred while waiting for the requested operation. |

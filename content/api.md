@@ -76,15 +76,15 @@ and is accurate to within one clock increment.
 The alert request applies to the currently active task and may not be
 called from an ISR.
 
-The time interval parameter is expressed in 100 millisecond units. The
-minimum time interval that may be requested is 100 milliseconds and the
-maximum is 6553.5 seconds. Accuracy is +/- 100 milliseconds.
+The time interval parameter is expressed in 100-millisecond units. The
+minimum time interval that may be requested is 100-milliseconds and the
+maximum is 6553.5 seconds. Accuracy is +/- 100-milliseconds.
 
 ### PARAMETERS
 
 | Name | Type | Description |
 | --- | --- | --- |
-| *tout\_val* | INT | Elapsed time value in 100 millisecond increments. |
+| *tout\_val* | INT | Elapsed time value in 100-millisecond increments. |
 
 ### RETURN
 
@@ -138,11 +138,11 @@ resource.
 The resource id must first be gotten using the CR\_GETID primitive.
 
 Resource access is managed by a semaphore, and tasks are queued to the
-semaphore on a first-come-first-serve basis. If the resource is not
+semaphore on a first-come-first-serve basis. If the resource isn't
 locked
 by another task, the resource is locked and the calling task continues
 as
-the active task. If the resource is not available, the calling task is
+the active task. If the resource isn't available, the calling task is
 suspended. The task remains suspended until all previous tasks have
 released exclusive access to the resource.
 
@@ -200,13 +200,12 @@ int main(void)
 
 Get mutually exclusive access to the processor.
 
-This primitive is implemented by disabling maskable interrupts, and is
+This primitive is implemented by disabling maskable interrupts and is
 not associated with a particular resource. Access is released by
 EXIT\_SCR.
 
 This primitive is recommended for mutually exclusive access of short
-
-Duration because kernel time-related function is affected.
+duration because kernel time-related function is affected.
 
 The processor condition code register is preserved upon return from
 the
@@ -244,7 +243,7 @@ int int0(void)
 
 ### DESCRIPTION
 
-This primitive is the mechanism for an interrupt service routine invoke
+This primitive is the mechanism for an interrupt service routine to invoke
 supervisory state processing.
 
 This primitive allows the calling interrupt service routine and nested
@@ -306,7 +305,7 @@ Release control of a resource that was acquired with the ENTER\_CR
 primitive.
 
 The resource identifier must first be gotten using the CR\_GETID
-primitive, and must be the same identifier used to acquire the
+primitive and must be the same identifier used to acquire the
 resource
 with ENTER\_CR. Only the task that currently has access to the
 resource
@@ -319,9 +318,9 @@ becomes the active task. The suspended task becomes active according
 to
 its assigned priority.
 
-An error status is returned if the resource was not previously locked,
+An error status is returned if the resource wasn't previously locked,
 an
-invalid resource id was given or corrupted data structures were
+invalid resource id was given, or corrupted data structures were
 detected.
 
 ### PARAMETERS
@@ -335,7 +334,7 @@ detected.
 | Value | Description |
 | --- | --- |
 | SUCCESS | Resource released. |
-| FAILURE | Invalid resource id, resource not acquired with previous ENTER\_CR by this task or corrupted kernel data detected. |
+| FAILURE | Invalid resource id, resource not acquired with previous ENTER\_CR by this task, or corrupted kernel data detected. |
 
 ## EXIT\_SCR
 
@@ -371,8 +370,7 @@ This primitive is the complement of ENTER\_SCR and releases mutually
 exclusive control of the processor.
 
 The processor condition code register at the time ENTER\_SCR was
-called
-are restored.
+called is restored.
 
 This primitive must not be called without a previous call to
 ENTER\_SCR.
@@ -415,7 +413,7 @@ call.
 
 Interrupts may be nested and ENTER\_SSTATE primitive calls may be
 nested. If EXIT\_SSTATE is called by an interrupt service routine that
-is not the last interrupt service routine pending, processing continues
+isn't the last interrupt service routine pending, processing continues
 in the supervisory state.
 
 The last interrupt service routine to exit the supervisory state returns
@@ -483,7 +481,7 @@ structures associated with the resource, however, these data
 structures
 never need to be referenced by an application.
 
-Because a resource identifier does not change once it is created by
+Because a resource identifier doesn't change once it is created by
 the
 kernel, this primitive only needs to be called once.
 
@@ -536,14 +534,14 @@ int main(void)
 ### DESCRIPTION
 
 This returns the identity of the currently active task. It operates
-the same as GETTID, except the task name is not needed.
+the same as GETTID, except the task name isn't needed.
 
 The task that invokes this primitive is the currently active task.
 
 This primitive also verifies the integrity of the task\'s data
 structures.
 
-Because the task\'s identity does not change after it is created, this
+Because the task\'s identity doesn't change after it is created, this
 primitive only needs to be called once.
 
 This is a non-suspending primitive.
@@ -636,7 +634,7 @@ This is a non-suspending primitive.
 | Value | Description |
 | --- | --- |
 | SUCCESS | Task id available. |
-| FAILURE | Invalid task name, task does not exist, or invalid data. |
+| FAILURE | Invalid task name, task doesn't exist, or invalid data. |
 
 ## GETTIK
 
@@ -669,7 +667,7 @@ int main(void)
 
 Get the current system time counter value.
 
-The value is a continuous, 16-bit, 100 millisecond counter.
+The value is a continuous, 16-bit, 100-millisecond counter.
 
 ### PARAMETERS
 
@@ -739,7 +737,7 @@ available memory.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| *mem\_pp* | CHAR\*\* | Address for task\'s dynamic memory location. INV\_ADDR is returned if memory has not been allocated for the task. |
+| *mem\_pp* | CHAR\*\* | Address for task\'s dynamic memory location. INV\_ADDR is returned if memory hasn't been allocated for the task. |
 
 ### RETURN
 
@@ -781,7 +779,7 @@ Log fatal-type fault and initiate recovery.
 
 If a task has been defined in the configuration file as a fault handler,
 the task is signaled with EVT\_0, to indicate a fatal fault occurred,
-provided the fault did not occur in the fault handler task.
+provided the fault didn't occur in the fault handler task.
 
 If a task detects and reports a fatal-type fault or the kernel detects a
 fatal-type fault in the task domain, the task is removed from the list
@@ -790,7 +788,7 @@ this primitive returns to the scheduler and the system continues to run,
 as much as possible without the affected task.
 
 If a fatal-type fault is detected in the kernel domain or in hardware on
-which the kernel is dependent, system integrity cannot be guaranteed and
+which the kernel is dependent, system integrity can't be guaranteed and
 a STOP instruction is executed. Upon reset, the fault is signaled to the
 fault handler task, if one was defined.
 
@@ -843,7 +841,7 @@ int main(void)
 
 Report a warning-type fault.
 
-This primitive is used if detected faults are notable but may not
+This primitive is used if detected faults aren'table but may not
 compromise the system.
 
 For warning-type faults, only the fault location and fault-specific
@@ -960,7 +958,7 @@ first two bytes of the returned item.
 
 Queue discipline is first-in-first-out.
 
-Exclusive access is guaranteed to the calling task, and the task is not
+Exclusive access is guaranteed to the calling task, and the task isn't
 suspended if there are no queued items.
 
 ### PARAMETERS
@@ -1089,7 +1087,7 @@ pointer of type BYTE\* as the first two bytes of the item to be queued.
 
 Queue discipline is first-in-first-out.
 
-The calling task is guaranteed exclusive access to the queue and is not
+The calling task is guaranteed exclusive access to the queue and isn't
 suspended.
 
 There is no limit on the number of items that may be queued, other than
@@ -1197,7 +1195,7 @@ This primitive may not be called from an interrupt service routine.
 
 ## SEND
 
-Send Message to Task
+Send message to task
 
 ### SYNTAX
 
@@ -1256,7 +1254,7 @@ Multiple messages may be queued to a task, and are serviced with a
 first-in-first-out discipline. Also, messages are posted to a task
 regardless of whether or not a RECV is currently pending.
 
-This is an asynchronous operation because the sending task does not wait
+This is an asynchronous operation because the sending task doesn't wait
 for a response from the destination task. End-to-end confirmation of
 message delivery is done by the application.
 
@@ -1267,10 +1265,10 @@ No message data is copied during the message transfer, only the pointer
 to the message is passed to the destination task; it is the
 responsibility of both tasks to coordinate allocation and freeing of the
 message data area. The message location and size parameters refer only
-to application message data. Memory does not need to be reserved for
+to application message data. Memory doesn't need to be reserved for
 message management because this is handled by the kernel.
 
-The total number of messages that may be active at any given time are
+The total number of messages that may be active at any given time is
 defined in the system configuration file.
 
 ### PARAMETERS
@@ -1334,7 +1332,7 @@ int TASK_1(void)
 This primitive provides a synchronization mechanism by signaling a task
 that one or more events occurred.
 
-The task to be signaled must exist and may be the current task.
+The task to be signaled must exist. The task can be the current task.
 
 The *event\_id* is a user-defined bit map with each bit corresponding
 to an
@@ -1349,7 +1347,7 @@ satisfied, the signaling task is suspended. The task resumes as the
 active
 task, according to its assigned priority.
 
-If all wait criteria of the signaled task are not satisfied, the event
+If all wait criteria of the signaled task aren't satisfied, the event
 is posted
 to the signaled task, whether or not the task has a WAIT request
 pending.
@@ -1368,12 +1366,12 @@ the GETTID or GETMYTID primitives.
 
 | Value | Description |
 | --- | --- |
-| SUCCESS | Task signalled. |
-| FAILURE | Task does not exist or corrupted data detected. |
+| SUCCESS | Task signaled. |
+| FAILURE | Task doesn't exist or corrupted data detected. |
 
 ## WAIT
 
-Wait for Event Occurrence
+Wait for event occurrence
 
 ### SYNTAX
 
@@ -1428,9 +1426,8 @@ logical OR condition was specified and any of the
 requested events were
 received.
 
-All events are cleared, including those that were not used to complete
-the
-wait, when the task is resumed.
+All events are cleared, including those that weren't used to complete
+the wait, when the task is resumed.
 
 This primitive may not be called from an interrupt service routine.
 

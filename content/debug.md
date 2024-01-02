@@ -147,12 +147,12 @@ provided)
 This data area is used to log fault information reported by the
 [LOG\_FATAL](#log_fatal) and [LOG\_WARN](#log_warn) primitives.
 
-Its contents reflects the system state when the fault was reported.
+Its content reflects the system state when the fault was reported.
 
 For the [LOG\_WARN](#log_warn) primitive, only *fault\_loc* and *fault\_qual* data
 are logged.
 
-Task-related data is not logged if no task was active when the fault
+Task-related data isn't logged if no task is active when the fault is
 reported.
 
 > Fault Analysis Area

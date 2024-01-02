@@ -10,11 +10,11 @@ One of the resources managed by the GX/Kernel is memory. This section
 presents the GX/Kernel view of memory and the management policies.
 
 The following figure shows a typical memory map for an MC68HC11A8 version
-microcontroller with internal RAM, ROM and EEPROM. The map can be
+microcontroller with internal RAM, ROM, and EEPROM. The map can be
 applied to other versions by accounting for the different types of
 memory available and their location.
 
-The GX/Kernel, itself, does not place restrictions on memory type or
+The GX/Kernel, itself, doesn't place restrictions on memory type or
 location, except for the 256 bytes from locations 0000H to 00FFH. This
 is the only memory used by the kernel that is required to be at a fixed
 location.
@@ -23,7 +23,7 @@ The kernel code may be located in RAM or ROM.
 
 The example shows a system with external RAM beginning at address 0000H,
 and external ROM or RAM beginning at address 8000H, for the full 64K
-address space. Memory banks, up to a maximum or four, are shown in the
+address space. Memory banks, up to a maximum of four, are shown in the
 upper half of the address space.
 
 ## Memory partitions
@@ -35,7 +35,7 @@ upper half of the address space.
 This area is used by the kernel for fault management and control
 information. Locations 0054H to 00C3H are used as the stack area during
 initialization. Once the task state is entered, these locations are
-available to the application. However, these data are not preserved on a
+available to the application. However, these data aren't preserved on a
 system restart.
 
 ### 64-BYTE REGISTER BLOCK
@@ -46,12 +46,12 @@ uses configuration file data to set the registers\' location.
 
 ### APPLICATION DYNAMIC DATA AREA
 
-This area is memory, which is not specifically dedicated to a task. For
+This area is memory, which isn't specifically dedicated to a task. For
 example, database memory or abstract data type instances.
 
 The kernel provides no protection mechanisms for accessing this memory.
 
-This memory is not accessed by the kernel, except during the
+This memory isn't accessed by the kernel, except during the
 initialization RAM test.
 
 ### TASK DYNAMIC DATA AREA
@@ -61,7 +61,7 @@ specific task.
 
 The kernel dynamically allocates blocks of this memory to tasks at
 initialization. The size is defined in the configuration file. The
-kernel never makes the location available to a task that does not
+kernel never makes the location available to a task that doesn't
 \"own\" the partition.
 
 The kernel never accesses this area, except during the initialization
@@ -147,29 +147,29 @@ the shared code and data must reside in the same location in each bank.
 This internal EEPROM is available to applications, as described in
 Motorola technical documentation.
 
-This memory is not used by the kernel.
+This memory isn't used by the kernel.
 
 ### INTERNAL 8K ROM
 
 This internal ROM is available to applications, as described in Motorola
 technical documentation.
 
-This memory is not used by the kernel.
+This memory isn't used by the kernel.
 
 ### INTERRUPT VECTORS
 
 These are the hardware interrupt vector registers, as described in
 Motorola technical documentation. Only the real-time interrupt (RTII),
-software interrupt (SWI) and RESET vector interrupt are reserved for the
+software interrupt (SWI), and RESET vector interrupt are reserved for the
 kernel.
 
 ## Task Memory Allocation
 
-Tasks require code, stack and, optionally, dynamic memory areas.
+Tasks require code, stack, and, optionally, dynamic memory areas.
 
 Dynamic memory is provided as a means of partitioning memory for the
 exclusive use of the task. How this memory is allocated and used by the
-task at run-time, is an issue for application design. This memory is not
+task at run-time, is an issue for application design. This memory isn't
 used by the kernel or other tasks, although a task may inform other
 tasks of the location of its dynamic memory. This memory is never
 released.

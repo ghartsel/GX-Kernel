@@ -18,7 +18,7 @@ $ mkdir src
 $ cd src
 ```
 
-> 2: Clone the GX/Kernel respository:
+> 2: Clone the GX/Kernel repository:
 
 ```shell
 $ git clone git://git.ghworks.org/gxkernel.git gxkernel
@@ -205,9 +205,9 @@ Care should be taken to only use kernel facilities to affect a task\'s
 behavior. For example, by using timing primitives to delay a task,
 instead of instructions that cause a task to busy-wait, other tasks are
 allowed to run while the task is waiting. Kernel fault management guards
-against tasks that do not release control of the processor.
+against tasks that don't release control of the processor.
 
-Although a task is not normally preempted by the kernel or another task,
+Although a task isn't normally preempted by the kernel or another task,
 a task may be preempted by a hardware interrupt. This is transparent to
 the task, however, and processing always resumes with the interrupted
 task.
@@ -220,9 +220,9 @@ individually, by changing a task\'s attributes.
 | Attribute | Description |
 | --- | --- |
 | Priority | Each task may be assigned a priority level relative to other tasks. Tasks that have work pending and are ready to run are given processor control according to their priority.<br><br>There are three priority levels. The first task ready at the highest priority level is the next task to run. |
-| Instance | The GX/Kernel supports the concept of multiple-instance tasks. A task instance is a task that is \"known\" by the kernel at run-time. Usually, each instance is derived from a separate block of source code. With multiple instance tasks, however, more than one run-time instance may be from the same source code. This is useful for tasks that perform the same function on different entities, such as a task for each I/O channel or network link. Rather than having a single task maintain separate data for each entity, each task manages one set of data. These types of tasks are also more efficient because they do not need to continually map an entity to its data or function.<br><br>Care must be taken, however, in coding multiple instance tasks. Such tasks cannot declare and reference C language-type static data because each run-time instance references these same data. Dynamic data must be allocated by each task to get its own data space, usually at initialization time. |
+| Instance | The GX/Kernel supports the concept of multiple-instance tasks. A task instance is a task that is \"known\" by the kernel at run-time. Usually, each instance is derived from a separate block of source code. With multiple instance tasks, however, more than one run-time instance may be from the same source code. This is useful for tasks that perform the same function on different entities, such as a task for each I/O channel or network link. Rather than having a single task maintain separate data for each entity, each task manages one set of data. These types of tasks are also more efficient because they don't need to continually map an entity to its data or function.<br><br>Care must be taken, however, in coding multiple instance tasks. Such tasks can't declare and reference C language-type static data because each run-time instance references these same data. Dynamic data must be allocated by each task to get its own data space, usually at initialization time. |
 | Memory area | Each task has its own stack and dynamic memory areas.<br><br>The stack area is required. Any stack size may be defined, depending on expected stack usage. The stack is used by all subroutines called from the task, primitive calls, and interrupts that occur while in the TASK\_STATE.<br><br>Dynamic memory allocation is optional. If a task allocates dynamic memory, there are no restrictions on its use.<br><br>Kernel fault management continually audits stack and dynamic memory to detect corruption. Corrupted memory causes the task to be deleted. While this may limit fault propagation and increase system availability, depending on the importance of the deleted task, it is likely that neighboring task memory is also corrupted. |
-| Resident bank | The GX/Kernel supports hardware memory bank switching to extend the 64-kilobyte address limitation. Bank switching only applies to code space memory, however. If the code is located in ROM, then ROM bank switching is allowed and, if the code is located in RAM, then that part of RAM with code space may be switched. Bank switching is not supported for RAM data memory because this memory maintains the system context used by the kernel.<br><br>The task unit is a natural unit of consideration for bank switching. This is because context switching already occurs at the task level, so context switching to another bank is no different than a normal kernel context switch.<br><br>When a task is ready to run, the kernel determines the bank where the task resides, switches in the appropriate bank and resumes running the task.<br><br>A task\'s resident bank is defined in the configuration file.<br><br>The entry point of the user-provided bank switching procedure is also defined in the configuration file.<br><br>The usual cautions apply in writing the bank switching procedure to be able to return to the original bank. The initialization stack area, in internal RAM, is available to preserve information across a bank switch. In addition, the kernel and any common routines must be located at the same location in all banks. Only task code area and some specialized routines may be bank-dependent. |
+| Resident bank | The GX/Kernel supports hardware memory bank switching to extend the 64-kilobyte address limitation. Bank switching only applies to code space memory, however. If the code is located in ROM, then ROM bank switching is allowed and, if the code is located in RAM, then that part of RAM with code space may be switched. Bank switching isn't supported for RAM data memory because this memory maintains the system context used by the kernel.<br><br>The task unit is a natural unit of consideration for bank switching. This is because context switching already occurs at the task level, so context switching to another bank is no different than a normal kernel context switch.<br><br>When a task is ready to run, the kernel determines the bank where the task resides, switches in the appropriate bank and resumes running the task.<br><br>A task\'s resident bank is defined in the configuration file.<br><br>The entry point of the user-provided bank switching procedure is also defined in the configuration file.<br><br>The usual cautions apply in writing the bank switching procedure to be able to return to the original bank. The initialization stack area, in internal RAM, is available to preserve information across a bank switch. In addition, the kernel and any common routines must be located at the same location in all banks. Only task code area and some specialized routines may be bank-dependent. |
 
 ### Task Identification and Creation
 
@@ -263,7 +263,7 @@ allocated.
 | INITIALIZATION | Immediately following a hardware or software reset, the kernel takes control of the processor. In this state, the only application programs that run are the hardware and software routines defined in the system configuration file. |
 | TASK | If there is work for a task and the task assigned to the work is available, the kernel enters the TASK state. The intricacies of task-level processing are described in more detail in [TASK STATES](#task-states). |
 | SUPERVISORY | In the SUPERVISORY state, resources are allocated from the systems resources, rather than task resources. This state may be entered when a hardware interrupt occurs during the TASK state. |
-| MONITOR | When no task work or interrupt are pending, the kernel enters the MONITOR state and uses system resources. |
+| MONITOR | When no task work or interrupt is pending, the kernel enters the MONITOR state and uses system resources. |
 
 In the TASK and SUPERVISORY states, the watchdog (COP) monitors
 execution time. If the task execution time exceeds the watchdog period,
@@ -277,7 +277,7 @@ register.
 #### TASK STATES
 
 All tasks are put in a READY state at initialization. The first task in
-the task configuration table is the first task to run. Each task runs,
+the task configuration table is the first task to run. Each task runs
 or initializes its local data areas until it calls a suspending
 primitive.
 
@@ -295,12 +295,12 @@ not necessarily at the task\'s entry point.
 
 In addition to READY, ACTIVE, and WAIT states, a task may be in the
 DORMANT state. This occurs if a fault was detected by the kernel during
-the task\'s ACTIVE state. Once in the DORMANT state, the task cannot run
+the task\'s ACTIVE state. Once in the DORMANT state, the task can't run
 again until the system is restarted; this prevents fault propagation.
 
 #### NON-TASK STATES
 
-The SUPERVISORY state is entered by specific request to use
+The SUPERVISORY state is entered by a request to use
 common system resources. See the discussion below on handling
 interrupts, for more detailed information.
 
@@ -343,8 +343,8 @@ Also, configurable microcontroller parameters that need to be set at
 initialization are defined in the configuration file.
 
 The kernel provides orderly initialization sequencing by initializing
-from lower to higher levels of abstraction. First the hardware, then
-kernel, then application hardware and software are initialized; the idea
+from lower to higher levels of abstraction. First, the hardware, then
+the kernel, and then application hardware and software are initialized; the idea
 is the hardware must be available for the kernel to run, and the
 hardware and kernel must be available for the application to run.
 
@@ -353,13 +353,13 @@ initialize application hardware and software. The kernel initializes
 application hardware before software.
 
 At each step, the integrity of the supporting layer is confirmed before
-the next layer is initialized. If resources are not available for a
-layer to provide the necessary services, subsequent layers are not
+the next layer is initialized. If resources aren't available for a
+layer to provide the necessary services, subsequent layers aren't
 initialized.
 
 Faults that occur before kernel resource allocation and initialization
 are complete are considered critical because the integrity of the system
-cannot be guaranteed. If a critical fault is detected, a STOP
+can't be guaranteed. If a critical fault is detected, a STOP
 instruction is executed to prevent fault propagation.
 
 ### Handling Interrupts
@@ -386,7 +386,7 @@ the task\'s memory area stack.
 
 The kernel supports nested interrupts. That is, an interrupt may occur,
 and call ENTER\_SSTATE, while another interrupt service routine is in
-progress. Control does not return to the task until EXIT\_SSTATE is
+progress. Control doesn't return to the task until EXIT\_SSTATE is
 called by the last interrupt service routine.
 
 Tasks may become READY to run as a result of a primitive called by the
@@ -439,13 +439,13 @@ more detailed information about each primitive.
 ### Suspensive Primitives
 
 There are two types of primitives. Those that may cause a task to be
-preempted, which are called suspending primitives, and those that return
+preempted are called suspending primitives, and those that return
 to the caller without preemption and are called non-underline suspending
 primitives. The suspending primitives are,
 
 | Primitive | Suspending Condition |
 | --- | --- |
-| [ENTER\_CR](#enter_cr) | Critical region is not available.<br>Unblocking primitive: EXIT\_CR or timeout |
+| [ENTER\_CR](#enter_cr) | Critical region isn't available.<br>Unblocking primitive: EXIT\_CR or timeout |
 | [RECV](#recv) | No message is pending for the task.<br>Unblocking primitive: SEND or timeout |
 | [WAIT](#wait) | No event is pending for the task for requested event condition.<br>Unblocking primitive: SIGNAL or timeout |
 
@@ -458,7 +458,7 @@ Suspending primitives may not be called from an interrupt service
 routine because an interrupt may not be suspended by the kernel.
 Suspension supports real-time applications at the task level.
 
-While tasks may be prioritized, primitives do not have a priority
+While tasks may be prioritized, primitives don't have a priority
 attribute. For example, there is no priority assigned to messages for
 the SEND and RECV primitives. All prioritization is considered with
 respect to tasks.
@@ -482,9 +482,9 @@ operate without intervention, possibly in the presence of errors.
 
 Systems may be classified as fault-tolerant or fault-intolerant.
 Fault-tolerant systems are characterized by anticipating that all errors
-cannot be removed before run-time, and mechanisms are provided to detect
+can't be removed before run-time, and mechanisms are provided to detect
 and handle faults when they do occur. Complex, real-time systems,
-usually, cannot be tested adequately to guarantee that no faults occur.
+usually, can't be tested adequately to guarantee that no faults occur.
 Fault intolerant systems, on the other hand, assume that the system is
 sufficiently tested, no faults occur, and no fault handling is
 provided.
@@ -518,7 +518,7 @@ are described in the sections, below.
 ### Fault Management
 
 Fault management has three aspects; 1) fault detection, 2) fault
-handling and reporting and 3) fault recovery.
+handling and reporting, and 3) fault recovery.
 
 The kernel uses its fault analysis area for fault management. These data
 are described in detail in a separate section.
@@ -534,7 +534,7 @@ The following fault detection methods are used by the GX/Kernel.
 The GX/Kernel partitions and classifies memory for fault
 management. If the type of memory is known, the kernel can verify that
 the data is
-consistent with the memory type. While this method does not guarantee
+consistent with the memory type. While this method doesn't guarantee
 fault
 detection, common types of memory corruption are detectable.
 System and task stacks, kernel data structures, and kernel structures,
@@ -601,21 +601,21 @@ Fault classification, either critical or acceptable, depends on the
 kernel state and
 the scope of the data if it is a data-related fault. Acceptable faults,
 from the
-kernel\'s point of view are those that are limited to a single task.
+kernel\'s point of view, are those that are limited to a single task.
 Such faults occur
 in the TASK state or in a task\'s stack or dynamic data. Faults in any
 other
 kernel state are classified as critical.
 
 For acceptable faults, the kernel simply deletes the affected task, so
-the fault is not
+the fault isn't
 repeated or propagated. The fault is reported to the fault handling
 task if one is
 defined. It is left to the application to determine the impact of the
 deleted task and
 take appropriate recovery action.
 
-For critical faults, the kernel determines that system integrity cannot
+For critical faults, the kernel determines that system integrity can't
 be
 guaranteed. The kernel, therefore, reports the fault, then initiates a
 kernel restart.
@@ -631,7 +631,7 @@ use kernel primitives to report the fault and initiate recovery.
 
 The [LOG\_WARN](#log_warn) primitive is used to report non-critical faults. This is
 useful for
-noteworthy faults that do not affect system operation, and for
+noteworthy faults that don't affect system operation, and for
 check-pointing during debugging. The fault is only reported and logged; no
 recovery is initiated by the kernel.
 

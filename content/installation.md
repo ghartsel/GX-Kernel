@@ -9,7 +9,7 @@ title: Installation and Integration
 ## The Release Package
 
 The release package contains all required G/Kernel software, the system build
-utility and samples for tasks, configuration files, and development
+utility, and samples for tasks, configuration files, and development
 tools.
 
 The G/Kernel software is compatible with Archimedes development tools.
@@ -56,9 +56,9 @@ into a system.
 
 | Filename | Description |
 | --- | --- |
-| gxk000.xcl | This is a linker command file. It is useful for showing the memory assignments defined during linking, and for the inclusion and ordering of G/Kernel files. |
+| gxk000.xcl | This is a linker command file. It is useful for showing the memory assignments defined during linking and for the inclusion and ordering of G/Kernel files. |
 | gkc-stt.asm | This is an example configuration source file, which may be created with a text editor or by using the sysbld.sh utility. |
-| gkc-iv.asm | This is the default interrupt vector table distributed with the kernel. This file needs to be changed to support the interrupts used by an application; those interrupts used by the kernel should not be changed, however. |
+| gkc-iv.asm | This is the default interrupt vector table distributed with the kernel. This file needs to be changed to support the interrupts used by an application; those interrupts used by the kernel shouldn't be changed, however. |
 
 ### Kernel Installation
 
@@ -75,7 +75,7 @@ $ cd src
 ```shell
 $ git clone git://git.ghworks.org/gxkernel.git gxkernel
 ```
-2. Clone the G/Kernel respository:
+2. Clone the G/Kernel repository:
 
 The files needed to build and debug an application are in the following directories:
 
@@ -102,7 +102,7 @@ statements to those recognized by the assembler. All include files, both
 those used by the kernel and those used to interface to the kernel, may
 also need to be edited.
 
-The C language include files do not need to be changed, because no
+The C language include files don't need to be changed, because no
 vendor-dependent constructs or library functions are used.
 
 1.  Assemble the kernel source code files; this requires the include
@@ -123,8 +123,8 @@ vendor-dependent constructs or library functions are used.
     gkc-iv, needs to be changed to add the entry points for application
     interrupt service routines.
 
-    Care should be taken that interrupt vectors used by the kernel are
-    not modified. See [Interrupt Vectors](#interrupt-vectors).
+    Care should be taken that interrupt vectors used by the kernel aren't
+    modified. See [Interrupt Vectors](#interrupt-vectors).
 
 3.  Create and assemble the system configuration source code file, using either a
     text editor or the sysbld.sh utility.
@@ -135,7 +135,7 @@ vendor-dependent constructs or library functions are used.
     The example configuration file may serve as a template for a new file.
 
 4.  Create a linker command file that includes the kernel object files,
-    as shown in example the gxk000.xcl file.
+    as shown in the example gxk000.xcl file.
 
     <aside class="notice">
     If you use Archimedes development tools, link using the
@@ -144,7 +144,7 @@ vendor-dependent constructs or library functions are used.
     </aside>
 
 5.  Link the system to produce a binary or hex file for the target
-    hardware. This step is the same as for a system that does not
+    hardware. This step is the same as for a system that doesn't
     include the G/Kernel.
 
 After all kernel files have been edited and successfully assembled, the
@@ -185,7 +185,7 @@ makes the software portable to other compilers.
 If bank switching is used to extend the addressing limitation, bank
 switching must be done through the kernel. This supports the abstraction
 that the kernel manages system resources and memory is a resource.
-Language support for bank switching cannot be used in the kernel
+Language support for bank switching can't be used in the kernel
 environment.
 
 ## Hardware Interface
@@ -225,7 +225,7 @@ file.
 | --- | --- | --- | --- |
 | HPRIO | 03CH | 07H | This sets the real-time interrupt as the highest priority interrupt source. This is to assure the accuracy of the kernel timer services. |
 | INIT | 03DH | 01H | This positions the 64-byte internal register block at address 1000H. |
-| OPTION | 039H | 03H | his sets the watchdog (COP) timeout rate to 1.049 seconds, for an 8MHz crystal.<br><br>The watchdog is pulsed by the kernel whenever a task switch occurs, or periodically if there is no task work pending. This means that a task must not retain control of the processor for greater than the watchdog timeout period. |
+| OPTION | 039H | 03H | This sets the watchdog (COP) timeout rate to 1.049 seconds, for an 8MHz crystal.<br><br>The watchdog is pulsed by the kernel whenever a task switch occurs, or periodically if there is no task work pending. This means that a task must not retain control of the processor for greater than the watchdog timeout period. |
 | TMSK2 | 024H | 03H | This sets the timer prescale factor to 16 for a real-time interrupt rate of 32.77 milliseconds. |
 
 #### INTERRUPT VECTORS
