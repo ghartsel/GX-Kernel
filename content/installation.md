@@ -153,7 +153,7 @@ vendor-dependent constructs or library functions are used.
     include the G/Kernel.
 
 After all kernel files have been edited and successfully assembled, the
-kernel object files may be linked with your application source files. See [language](#language-considerations)
+kernel object files may be linked with your application source files.
 
 ### Language Considerations
 
