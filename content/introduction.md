@@ -35,6 +35,7 @@ $ nano myFirstApp.c
 ```c
 #include <stdio.h>
 #include <gxos.h>
+#include <gxconfig.h>
 
 int main(void)
 {
@@ -54,9 +55,13 @@ int main(void)
 }
 ```
 
-> 4: Compile, link, and load the executable into your emulator or hardware according to the instructions for your tool set.
+> 4: Edit the gxconfig.h file to match your hardware. The default settings are for the Motorola M68HC11 EVB evaluation board.
 
-> 5: Reset your hardware to run the myFirstApp example application. With a successful build, you should see the "Success: timeout." message displayed every 10 seconds.
+> 5: Run `$ make` to compile and link your example application with the GX/Kernel code and create a downloadable executable named main.hex.
+
+> 6: The final output file, main.hex, can now be downloaded and tested on your hardware or emulator. Refer to the documentation provided with your target board, emulator or PROM programmer for specific instructions on downloading files.
+
+> 7: Reset your target environment to run the myFirstApp example application. You should see the "Success: timeout." message displayed every 10 seconds. You are now set up to build a full application.
 
 The GX/Kernel features efficient and flexible real-time facilities that
 meet the demands of today's hard-deadline, embedded systems.

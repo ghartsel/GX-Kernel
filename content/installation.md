@@ -22,17 +22,10 @@ to be used in other development environments.
 The release contains the G/Kernel code and utility software in the
 following directories.
 
-#### /tools
+#### /src
 
-The /tools directory has the executable file, sysbld.sh, used
-to build the target system configuration file.
-
-#### /obj
-
-This directory contains the following relocatable object
-files compatible with the Archimedes M68HC11 linker. To create object
-files compatible with other linkers, the source code must be assembled
-with the desired assembler.
+This directory contains the GX/Kernel source files, including the
+gxconfig.h file for configuring your system.
 
 #### /inc
 
@@ -47,6 +40,18 @@ interface to the G/Kernel.
 | gki-k-l.inc | gki-k-l.h | Kernel literals |
 | gki-k-m.inc | gki-k-m.h | Kernel macros |
 | gki-k-e.inc | gki-k-e.h | Kernel externals |
+
+#### /obj
+
+This directory contains the following relocatable object
+files compatible with the Archimedes M68HC11 linker. To create object
+files compatible with other linkers, the source code must be assembled
+with the target assembler.
+
+#### /tools
+
+The /tools directory has the `make` file
+to build the target system configuration file.
 
 #### /examples
 

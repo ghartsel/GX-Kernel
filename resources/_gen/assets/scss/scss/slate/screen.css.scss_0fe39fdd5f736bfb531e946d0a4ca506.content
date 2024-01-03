@@ -359,6 +359,9 @@ th {
 .content p {
   font-family: "MuseoSans"; }
 
+.content blockquote {
+  font-family: "MuseoSans"; }
+
 .toc-wrapper {
   font-size: 13px;
   font-family: "MuseoSans"; }
